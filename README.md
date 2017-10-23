@@ -48,9 +48,8 @@ console.log(result.toString());
 To-Do
 -----
 
-* Deflate support
-* Gzip support
-* One-time inflate support
+* Deflate stream support
+* One-time deflate/inflate support
 
 License
 -------

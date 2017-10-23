@@ -89,7 +89,6 @@ class ZlibSyncInflate : public ObjectWrap {
                 stream->avail_out = self->out_buffer.size() - stream->total_out;
 
                 self->err = inflate(stream, flush);
-                fprintf(stderr, "err %d\n", self->err);
 
                 if((self->err == Z_OK || self->err == Z_BUF_ERROR) && stream->avail_in > 0) {
                     self->did_resize &= 1;
@@ -155,9 +154,9 @@ class ZlibSyncInflate : public ObjectWrap {
                 return Nan::ThrowTypeError("Use the new operator to construct a ZlibSyncInflate.");
             }
 
-            int windowBits = 15;
             unsigned int chunkSize = 16 * 1024;
             bool toString = false;
+            int windowBits = 15;
             if(info.Length() >= 1 && info[0]->IsObject()) {
                 Local<Object> options = Local<Object>::Cast(info[0]);
 

@@ -1,0 +1,30 @@
+{
+    "name": "zlib-sync",
+    "version": "0.0.0",
+    "description": "Synchronous zlib bindings for NodeJS",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint --fix test",
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/abalabahaha/zlib-sync.git"
+    },
+    "keywords": [
+        "zlib",
+        "sync"
+    ],
+    "author": "abalabahaha",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/abalabahaha/zlib-sync/issues"
+    },
+    "homepage": "https://github.com/abalabahaha/zlib-sync#readme",
+    "dependencies": {
+        "nan": "^2.7.0"
+    },
+    "devDependencies": {
+        "mocha": "^4.0.1"
+    }
+}

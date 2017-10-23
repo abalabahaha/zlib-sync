@@ -1,0 +1,12 @@
+.DS_Store
+.gitmodules
+build
+deps/zlib/*
+!deps/zlib/*.c
+!deps/zlib/*.h
+!deps/zlib/README
+lib
+node_modules
+package-lock.json
+test
+*.log

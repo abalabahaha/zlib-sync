@@ -137,7 +137,7 @@ class ZlibSyncInflate : public ObjectWrap {
             if(self->err < Z_OK) {
                 info.GetReturnValue().Set(Nan::Null());
             } else if(self->to_string) {
-                info.GetReturnValue().Set(Nan::New<String>((char*)self->out_buffer.data()).ToLocalChecked());
+                info.GetReturnValue().Set(Nan::New<String>((char*)self->out_buffer.data(), self->result_size).ToLocalChecked());
             } else {
                 info.GetReturnValue().Set(Nan::CopyBuffer((char*)self->out_buffer.data(), self->result_size).ToLocalChecked());
             }

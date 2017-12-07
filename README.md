@@ -1,7 +1,7 @@
 zlib-sync
 =========
 
-Synchronous zlib for NodeJS
+Synchronous zlib bindings for NodeJS
 
 Originally made for JS libraries interacting with the Discord gateway, where compression requires a shared zlib context in a synchronous fashion.
 

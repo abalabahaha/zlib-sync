@@ -209,7 +209,7 @@ class ZlibSyncInflate : public ObjectWrap {
 NAN_MODULE_INIT(AllInit) {
     ZlibSyncInflate::Init(target);
 
-    #define EXPORT_CONST(prop) Nan::ForceSet(target, Nan::New<String>(#prop).ToLocalChecked(), Nan::New<Integer>(static_cast<int32_t>(prop)), static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete))
+    #define EXPORT_CONST(prop) Nan::DefineOwnProperty(target, Nan::New<String>(#prop).ToLocalChecked(), Nan::New<Integer>(static_cast<int32_t>(prop)), static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete))
 
     EXPORT_CONST(Z_NO_FLUSH);
     EXPORT_CONST(Z_PARTIAL_FLUSH);
@@ -249,7 +249,7 @@ NAN_MODULE_INIT(AllInit) {
 
     EXPORT_CONST(Z_NULL);
 
-    Nan::ForceSet(target, Nan::New<String>("ZLIB_VERSION").ToLocalChecked(), Nan::New<String>(zlibVersion()).ToLocalChecked(), static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete));
+    Nan::DefineOwnProperty(target, Nan::New<String>("ZLIB_VERSION").ToLocalChecked(), Nan::New<String>(zlibVersion()).ToLocalChecked(), static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete));
 }
 
 NODE_MODULE(zlib_sync, AllInit)

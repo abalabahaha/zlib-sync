@@ -65,7 +65,7 @@ class ZlibSyncInflate : public ObjectWrap {
 
         static NAN_METHOD(Push) {
             ZlibSyncInflate* self = ObjectWrap::Unwrap<ZlibSyncInflate>(info.This());
-            auto context = info.GetIsolate()->GetCurrentContext();
+            Local<Context> context = Nan::GetCurrentContext();
             Local<Object> buffer = Local<Object>::Cast(info[0]);
             int flush = Z_NO_FLUSH;
             if(info[1]->IsBoolean()) {
@@ -153,7 +153,7 @@ class ZlibSyncInflate : public ObjectWrap {
             if(!info.IsConstructCall()) {
                 return Nan::ThrowTypeError("Use the new operator to construct a ZlibSyncInflate.");
             }
-            auto context = info.GetIsolate()->GetCurrentContext();
+            Local<Context> context = Nan::GetCurrentContext();
             unsigned int chunkSize = 16 * 1024;
             bool toString = false;
             int windowBits = 15;
@@ -187,7 +187,7 @@ class ZlibSyncInflate : public ObjectWrap {
 
         static NAN_MODULE_INIT(Init) {
             Nan::HandleScope scope;
-            auto context = Nan::GetCurrentContext();
+            Local<Context> context = Nan::GetCurrentContext();
             Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
             tpl->SetClassName(Nan::New<String>("ZlibSyncInflate").ToLocalChecked());
             tpl->InstanceTemplate()->SetInternalFieldCount(1);

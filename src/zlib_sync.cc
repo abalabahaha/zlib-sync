@@ -65,15 +65,14 @@ class ZlibSyncInflate : public ObjectWrap {
 
         static NAN_METHOD(Push) {
             ZlibSyncInflate* self = ObjectWrap::Unwrap<ZlibSyncInflate>(info.This());
-            Local<Context> context = Nan::GetCurrentContext();
             Local<Object> buffer = Local<Object>::Cast(info[0]);
             int flush = Z_NO_FLUSH;
             if(info[1]->IsBoolean()) {
-                if(info[1]->BooleanValue(context).ToChecked()) {
+                if(Nan::To<bool>(info[1]).FromJust()) {
                     flush = Z_FINISH;
                 }
             } else if(info[1]->IsNumber()) {
-                flush = info[1]->Int32Value(context).ToChecked();
+                flush = Nan::To<int32_t>(info[1]).FromJust();
             }
 
             z_stream* stream = &self->stream;
@@ -153,7 +152,6 @@ class ZlibSyncInflate : public ObjectWrap {
             if(!info.IsConstructCall()) {
                 return Nan::ThrowTypeError("Use the new operator to construct a ZlibSyncInflate.");
             }
-            Local<Context> context = Nan::GetCurrentContext();
             unsigned int chunkSize = 16 * 1024;
             bool toString = false;
             int windowBits = 15;
@@ -162,12 +160,12 @@ class ZlibSyncInflate : public ObjectWrap {
 
                 Local<Value> val = Nan::Get(options, Nan::New<String>("chunkSize").ToLocalChecked()).ToLocalChecked();
                 if(val->IsNumber()) {
-                    chunkSize = val->Int32Value(context).ToChecked();
+                    chunkSize = Nan::To<uint32_t>(val).FromJust();
                 }
 
                 val = Nan::Get(options, Nan::New<String>("to").ToLocalChecked()).ToLocalChecked();
                 if(val->IsString()) {
-                    std::string to = *Nan::Utf8String(val->ToString(context).ToLocalChecked());
+                    std::string to = *Nan::Utf8String(Nan::To<String>(val).ToLocalChecked());
                     if(to == "string") {
                         toString = true;
                     }
@@ -175,7 +173,7 @@ class ZlibSyncInflate : public ObjectWrap {
 
                 val = Nan::Get(options, Nan::New<String>("windowBits").ToLocalChecked()).ToLocalChecked();
                 if(val->IsNumber()) {
-                    windowBits = val->Int32Value(context).ToChecked();
+                    windowBits = Nan::To<int32_t>(val).FromJust();
                 }
             }
 
@@ -201,7 +199,7 @@ class ZlibSyncInflate : public ObjectWrap {
             Nan::SetAccessor(itpl, Nan::New<String>("result").ToLocalChecked(), GetResult);
             Nan::SetAccessor(itpl, Nan::New<String>("windowBits").ToLocalChecked(), GetWindowBits);
 
-            target->Set(Nan::New<String>("Inflate").ToLocalChecked(), tpl->GetFunction(context).ToLocalChecked());
+            target->Set(context, Nan::New<String>("Inflate").ToLocalChecked(), tpl->GetFunction(context).ToLocalChecked()).ToChecked();
         }
 };
 

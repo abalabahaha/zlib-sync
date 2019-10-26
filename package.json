@@ -2,7 +2,8 @@
     "name": "zlib-sync",
     "version": "0.1.5",
     "description": "Synchronous zlib bindings for NodeJS",
-    "main": "index.js",
+	"main": "index.js",
+	"types": "index.d.ts",
     "scripts": {
         "lint": "eslint --fix test",
         "test": "mocha"
@@ -25,6 +26,7 @@
         "nan": "^2.14.0"
     },
     "devDependencies": {
+        "@types/node": "^12.11.7",
         "mocha": "^4.0.1"
     }
 }

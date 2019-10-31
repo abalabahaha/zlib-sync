@@ -1,14 +1,14 @@
 declare module 'zlib-sync' {
 	export interface InflateOptions {
 		chunkSize?: number;
-		to?: string;
+		to?: 'string';
 		windowBits?: number;
 	}
 
 	export class Inflate {
 		readonly windowBits: number;
-		readonly result: Buffer;
-		readonly msg: string;
+		readonly result?: Buffer | string;
+		readonly msg?: string;
 		readonly err: number;
 		readonly chunkSize: number;
 		public constructor(options?: InflateOptions);

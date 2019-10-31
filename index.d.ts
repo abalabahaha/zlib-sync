@@ -7,8 +7,8 @@ declare module 'zlib-sync' {
 
     export class Inflate {
         readonly windowBits: number;
-        readonly result?: Buffer | string;
-        readonly msg?: string;
+        readonly result: Buffer | string | null;
+        readonly msg: string | null;
         readonly err: number;
         readonly chunkSize: number;
         public constructor(options?: InflateOptions);

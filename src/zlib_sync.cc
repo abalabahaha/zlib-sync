@@ -65,6 +65,9 @@ class ZlibSyncInflate : public ObjectWrap {
 
         static NAN_METHOD(Push) {
             ZlibSyncInflate* self = ObjectWrap::Unwrap<ZlibSyncInflate>(info.This());
+            if (!node::Buffer::HasInstance(info[0])) {
+                return Nan::ThrowTypeError("data must be a Buffer");
+            }
             Local<Object> buffer = Local<Object>::Cast(info[0]);
             int flush = Z_NO_FLUSH;
             if(info[1]->IsBoolean()) {
